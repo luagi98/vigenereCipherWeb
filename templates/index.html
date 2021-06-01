@@ -1,0 +1,62 @@
+{% extends "base.html" %} {%block title%} Profile Card {%endblock%} {%block
+navbar%}
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #03485c;">
+  <div class="container-fluid">
+    <span class="navbar-brand">
+      Flask</span>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="http://127.0.0.1:5000/">Presentation</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="http://127.0.0.1:5000/project">Project</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{%endblock%} {%block content%}
+<div class="container my-5 py-5">
+  <div class="d-flex align-items-center justify-content-center">
+    <div class="card" style="width: 18rem">
+      <img
+        src="{{url_for('static',filename='images/profile.jpg')}}"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">Arturo Garcia</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Web Developer</h6>
+        <p class="card-text">
+          I'm a student of 8th semester in ESCOM, I like to play videogames,
+          listen to music and I want to become a Full-Stack Developer.
+        </p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item text-center">Student ID: 2014090244</li>
+      </ul>
+      <div class="card-body d-flex justify-content-evenly">
+        <a href="https://www.facebook.com/luis.arturo.5"><i class="fab fa-facebook-f"></a></i>
+        <a href="https://www.youtube.com/channel/UC5LovreOijLvXTnkxy9Ia7A"><i class="fab fa-youtube"></i></a>
+        <a href="https://github.com/luagi98"><i class="fab fa-github"></i></a>
+        <a href="mailto:luis.garcia_1998@hotmail.com"><i class="fas fa-at"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock%}

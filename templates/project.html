@@ -1,0 +1,88 @@
+{% extends "base.html" %} {%block title%} Profile Card {%endblock%} {%block
+navbar%}
+
+<nav
+  class="navbar navbar-expand-lg navbar-dark"
+  style="background-color: #03485c"
+>
+  <div class="container-fluid">
+    <span class="navbar-brand"> Flask</span>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link "
+            aria-current="page"
+            href="http://127.0.0.1:5000/"
+            >Profile Card</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="http://127.0.0.1:5000/project"
+            >Project</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{%endblock%}
+
+{%block content%}
+<div class="container my-5 py-5">
+  <div class="row d-flex align-items-center justify-content-between">
+      <div class="col-sm-4 d-flex align-items-center justify-content-center">
+        <div class="card" style="width: 18rem;">
+          <img src="{{url_for('static',filename='images/encrypt.jpg')}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Encrypt</h5>
+            <p class="card-text">Convert (information or data) into a cipher or code, especially to prevent unauthorized access.</p>
+          </div>
+          <div class="card-body d-grid gap-1 col-6 mx-auto">
+            <a href="http://127.0.0.1:5000/project/encrypt" class="btn btn-primary">Encrypt</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 d-flex align-items-center justify-content-center">
+        <div class="card" style="width: 18rem;">
+          <img src="{{url_for('static',filename='images/decrypt.jpg')}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Decrypt</h5>
+            <p class="card-text">To convert encrypted text into its equivalent plain text by means of a cryptosystem.</p>
+          </div>
+          <div class="card-body d-grid gap-1 col-6 mx-auto">
+            <a href="http://127.0.0.1:5000/project/decrypt" class="btn btn-primary">Decrypt</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 d-flex align-items-center justify-content-center">
+        <div class="card" style="width: 18rem;">
+          <img src="{{url_for('static',filename='images/Database.webp')}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Database</h5>
+            <p class="card-text">Consult all the operations carried out in the system as well as the relevant information of each operation.</p>
+          </div>
+          <div class="card-body d-grid gap-1 col-6 mx-auto">
+            <a href="http://127.0.0.1:5000/project/database" class="btn btn-primary">See All</a>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+{%endblock%}

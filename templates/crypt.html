@@ -1,0 +1,97 @@
+{% extends "base.html" %} {%block title%} {%if method == "encrypt"%} Encrypt
+{%else%} Decrypt {%endif%} {%endblock%} {%block navbar%}
+
+<nav
+  class="navbar navbar-expand-lg navbar-dark"
+  style="background-color: #03485c"
+>
+  <div class="container-fluid">
+    <span class="navbar-brand"> Flask</span>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="http://127.0.0.1:5000/"
+            >Profile Card</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="http://127.0.0.1:5000/project"
+            >Project</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{%endblock%} {%block content%} 
+
+<h1 class="d-flex align-items-center justify-content-center my-5">
+  {%if method == "encrypt"%} 
+    Encrypt
+  {%else%} 
+    Decrypt
+  {%endif%}
+</h1>
+{%if not flag%}
+<div class="container my-5 col-sm-4">
+    <form method="POST" action="/project/{{method}}">
+        <div class="mb-3">
+          <label for="textInput" class="form-label">
+            {%if method == "encrypt"%} 
+              Plane Text
+            {%else%} 
+              Encrypted Text 
+            {%endif%}
+          </label>
+          <input type="text" class="form-control" id="textInput" name="textInput">
+        </div>
+        <div class="mb-3">
+          <label for="cipherPassword" class="form-label">Password</label>
+          <input type="password" class="form-control" id="cipherPassword" name="cipherPassword">
+        </div>
+        <div class="d-grid gap-2 col-4 mx-auto">
+          <button type="submit" class="btn btn-primary">
+            {%if method == "encrypt"%} 
+              Encrypt
+            {%else%} 
+              Decrypt 
+            {%endif%}
+          </button>
+        </div>
+      </form>
+</div>
+
+{%else%}
+
+<div class="container my-5 col-sm-4">
+  <label for="textInput" class="form-label">
+    {%if method == "encrypt"%} 
+      Encrypted Text
+    {%else%} 
+      Decrypted Text
+    {%endif%}
+  </label>
+  <input type="text" class="form-control" id="textInput" name="textInput" readonly value="{{cryptedText}}">
+  <div class="card-body d-grid gap-1 col-6 mx-auto">
+    <a href="http://127.0.0.1:5000/project" class="btn btn-primary">Return to Main Area</a>
+  </div>
+</div>
+
+{%endif%}
+
+{%endblock%}
