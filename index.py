@@ -20,7 +20,7 @@ class Decrypted(bd.Model):
      id = bd.Column(bd.Integer,primary_key=True)
      encryptedText = bd.Column(bd.String(100))
      decryptedText = bd.Column(bd.String(100))
-     dateEncrypted = bd.Column(bd.Date)
+     dateDecrypted = bd.Column(bd.Date)
      
 
 
@@ -62,7 +62,7 @@ def decrypt():
           password = request.form.get("cipherPassword")
           decryptedText = decode(text,password,["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"])
           bd.session.rollback()
-          dec = Decrypted(encryptedText=text,decryptedText=decryptedText,datedecrypted=date.today())
+          dec = Decrypted(encryptedText=text,decryptedText=decryptedText,dateDecrypted=date.today())
           bd.session.add(dec)
           bd.session.commit()
           return render_template("crypt.html",method="decrypt",flag=True,cryptedText = decryptedText)
