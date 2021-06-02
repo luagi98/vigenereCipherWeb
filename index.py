@@ -3,24 +3,30 @@ from flask import Flask
 from flask import render_template,redirect,request
 from flask_sqlalchemy import SQLAlchemy
 from flask.helpers import url_for
-from datetime import date
+from datetime import datetime
 app = Flask(__name__)
+
+# Connection to vigenere database using Mysql
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+mysqlconnector://root:@localhost:3306/vigenere'
 bd = SQLAlchemy(app)
+
+# Class model encrypted(id,originalText,encryptedtext,dateEncrypted)
 
 class Encrypted(bd.Model):
      __tablename__='encrypted'
      id = bd.Column(bd.Integer,primary_key=True)
      originalText = bd.Column(bd.String(100))
      encryptedText = bd.Column(bd.String(100))
-     dateEncrypted = bd.Column(bd.Date)
+     dateEncrypted = bd.Column(bd.DateTime)
+
+# Class model decrypted(id,encryptedText,decryptedtext,dateDecrypted)
 
 class Decrypted(bd.Model):
      __tablename__='decrypted'
      id = bd.Column(bd.Integer,primary_key=True)
      encryptedText = bd.Column(bd.String(100))
      decryptedText = bd.Column(bd.String(100))
-     dateDecrypted = bd.Column(bd.Date)
+     dateDecrypted = bd.Column(bd.DateTime)
      
 
 
@@ -46,7 +52,8 @@ def encrypt():
           password = request.form.get("cipherPassword")
           encryptedText = code(text,password,["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"])
           bd.session.rollback()
-          enc = Encrypted(originalText=text,encryptedText=encryptedText,dateEncrypted=date.today())
+          enc = Encrypted(originalText=text,encryptedText=encryptedText,dateEncrypted=datetime.now())
+          # Insert in table "encrypted"
           bd.session.add(enc)
           bd.session.commit()
           return render_template("crypt.html",method="encrypt",flag=True,cryptedText = encryptedText)
@@ -62,18 +69,21 @@ def decrypt():
           password = request.form.get("cipherPassword")
           decryptedText = decode(text,password,["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"])
           bd.session.rollback()
-          dec = Decrypted(encryptedText=text,decryptedText=decryptedText,dateDecrypted=date.today())
+          dec = Decrypted(encryptedText=text,decryptedText=decryptedText,dateDecrypted=datetime.now())
+          # Insert in table "decrypted"
           bd.session.add(dec)
           bd.session.commit()
           return render_template("crypt.html",method="decrypt",flag=True,cryptedText = decryptedText)
      elif request.method == "GET":
           return render_template('crypt.html',method="decrypt",flag=False)
 
-# Database route, this method isn't already supported
+# Database route, this route shows all the records in vigenere database
 
 @app.route('/project/database')
 def database():
-     return render_template('database.html')
+     encryptedRecords = Encrypted.query.order_by(Encrypted.id).all()
+     decryptedRecords = Decrypted.query.order_by(Decrypted.id).all()
+     return render_template('database.html',encryptedRecords=encryptedRecords,decryptedRecords=decryptedRecords)
 
 if __name__ == '__main__':
     app.run(debug=True)

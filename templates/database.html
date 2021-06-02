@@ -25,44 +25,65 @@ navbar%}
 
 <div class="container my-5 py-5">
     <h1 class="text-center">Encrypt</h1>
-    <table class="table my-2 py-2">
+    <table class="table mt-2 pt-2 mb-5 pb-5">
         <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Original Text</th>
-                <th scope="col">Encrypted Text</th>
-                <th scope="col">Date</th>
+                <th class="text-center" scope="col">ID</th>
+                <th class="text-center" scope="col">Original Text</th>
+                <th class="text-center" scope="col">Encrypted Text</th>
+                <th class="text-center" scope="col">Date</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-            </tr>
+            {%if encryptedRecords|length > 0%}
+                {%for enc in encryptedRecords%}
+                    <tr>
+                        <th class="text-center" scope="row">{{enc.id}}</th>
+                        <td class="text-center">{{enc.originalText}}</td>
+                        <td class="text-center">{{enc.encryptedText}}</td>
+                        <td class="text-center">{{enc.dateEncrypted}}</td>
+                    </tr>
+                {%endfor%}
+            {%else%}
+                <tr>
+                    <th class="text-center" scope="row" colspan="4">No records in this table</th>
+                </tr>
+            {%endif%}
         </tbody>
     </table>
 
     <h1 class="text-center">Decrypted</h1>
-    <table class="table my-2 py-2">
+    <table class="table my-2 py-2 mb-5 pb-5">
         <thead>
+            
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Encrypted Text</th>
-                <th scope="col">Decrypted Text</th>
-                <th scope="col">Date</th>
+                <th class="text-center" scope="col">ID</th>
+                <th class="text-center" scope="col">Encrypted Text</th>
+                <th class="text-center" scope="col">Decrypted Text</th>
+                <th class="text-center" scope="col">Date</th>
             </tr>
+            
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-            </tr>
+            {%if decryptedRecords|length > 0%}
+                {%for dec in decryptedRecords%}
+                    <tr>
+                        <th class="text-center" scope="row">{{dec.id}}</th>
+                        <td class="text-center">{{dec.encryptedText}}</td>
+                        <td class="text-center">{{dec.decryptedText}}</td>
+                        <td class="text-center">{{dec.dateDecrypted}}</td>
+                    </tr>
+                {%endfor%}
+            {%else%}
+                <tr>
+                    <th class="text-center" scope="row" colspan="4">No records in this table</th>
+                </tr>
+            {%endif%}
         </tbody>
     </table>
+    <div class="card-body d-grid gap-1 col-6 mx-auto">
+        <a href="http://127.0.0.1:5000/project" class="btn btn-primary">Return to Main Area</a>
+    </div>
 </div>
 
 
