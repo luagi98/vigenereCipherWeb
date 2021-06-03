@@ -1,10 +1,24 @@
+
+
+body {
+    height: 100vh;
+    background: linear-gradient(to bottom, #025a71, #316d84, #4e8197, #6995aa, #84aabe);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 .fab,.fas {
     color: #03485c;
 }
 
 h1 {
-    color: #03485c;
+    color: white;
 }
+
+label {
+    color: white;
+}
+
 
 .btn-primary
  
